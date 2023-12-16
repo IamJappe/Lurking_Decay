@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour 
 {
     int speed = 10;
     float horizontal;
     float vertical; 
     CharacterController controller;
 
-    private void Start()
+    private void Start() 
     {
         controller = GetComponent<CharacterController>();
     }
