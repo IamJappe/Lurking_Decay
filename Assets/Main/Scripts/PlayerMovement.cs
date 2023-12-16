@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     float vertical; 
     CharacterController controller;
 
-    private void Start() 
+    private void Start()  
     {
         controller = GetComponent<CharacterController>();
     }
