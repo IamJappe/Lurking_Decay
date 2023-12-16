@@ -7,7 +7,7 @@ public class PlayerCamera : MonoBehaviour
     public int sensitivity = 200;
 
     float mouseX;
-    float mouseY;
+    float mouseY; 
 
     private void Update()
     {

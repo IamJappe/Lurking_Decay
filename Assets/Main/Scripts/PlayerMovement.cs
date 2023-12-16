@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     int speed = 10;
-
     float horizontal;
-    float vertical;
+    float vertical; 
     CharacterController controller;
 
     private void Start()
@@ -15,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    private void Update()    
     {
         horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
