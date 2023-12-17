@@ -8,6 +8,14 @@ public class PlayerCamera : MonoBehaviour
 
     float mouseX;
     float mouseY; 
+    
+  
+    private void Start()
+    {
+        //Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Update()
     {
