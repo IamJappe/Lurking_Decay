@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     int speed = 10;
     float horizontal;
     float vertical; 
+    
     CharacterController controller;
 
     private void Start()  
     {
+        
         controller = GetComponent<CharacterController>();
     }
 
