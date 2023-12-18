@@ -4,47 +4,43 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour 
 {
-    int speed = 10;
+    [Header("Settings")]
+    public float gravity;
+    public int jumpPower;
+    public int speed = 10;
+    [Header("Gravity")]
+    public Transform groundCheck;
+    public LayerMask mask;
+    bool isGrounded;
+
     float horizontal;
     float vertical; 
-
-    public GameObject backPackPanel;
-    bool isOpen = false;
     CharacterController controller;
-
+    Vector3 velocity;
 
     private void Start()  
     {
-        
         controller = GetComponent<CharacterController>();
     }
 
     private void Update()    
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, .5f, mask);
         horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
         Vector3 move = transform.forward * vertical + transform.right * horizontal;
         controller.Move(move);
-
-        //Open and close inventory 
-        if(Input.GetKeyDown(KeyCode.I) && isOpen == false)
+        
+        if(isGrounded && velocity.y < 0)
         {
-            isOpen = true;
-            backPackPanel.SetActive(true);
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            velocity.y = -2f;
         }
-        else if(Input.GetKeyDown(KeyCode.I) && isOpen == true)
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            isOpen = false;
-            backPackPanel.SetActive(false);
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            velocity.y = jumpPower;
         }
-
-
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
