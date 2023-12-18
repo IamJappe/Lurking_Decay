@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour 
 {
     [Header("Settings")]
-    public float gravity;
-    public int jumpPower;
+    public float gravity = -9.81f;
+    public int jumpPower = 5;
     public int speed = 10;
     [Header("Gravity")]
     public Transform groundCheck;
