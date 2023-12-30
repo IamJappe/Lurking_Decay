@@ -8,6 +8,7 @@ public class PlayerPunching : MonoBehaviour
     public float punchRange = 2f;
     public GameObject bloodEffect;
     private bool isPunching = false;
+   // public HealthSystem system;  // Assuming you have a HealthSystem component attached
 
     private void Update()
     {
@@ -15,7 +16,6 @@ public class PlayerPunching : MonoBehaviour
         {
             StartCoroutine(Punch());
         }
-
     }
 
     IEnumerator Punch()
@@ -28,17 +28,13 @@ public class PlayerPunching : MonoBehaviour
 
         RayCasts();
 
-       
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.5f);
 
-       
         handAnim.ResetTrigger("Punch");
         handAnim.SetTrigger("Bob");
 
-    
         yield return new WaitForSeconds(0.1f);
 
-       
         isPunching = false;
     }
 
@@ -50,12 +46,9 @@ public class PlayerPunching : MonoBehaviour
         {
             if (hit.collider.CompareTag("Dummy"))
             {
-                Debug.Log("Punched an enemy!");
+                Debug.Log("Punched enemy");
+                hit.collider.gameObject.SendMessage("Damage", 1);
                 Instantiate(bloodEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-            }
-            else
-            {
-                Debug.Log("Punched something else!");
             }
         }
     }

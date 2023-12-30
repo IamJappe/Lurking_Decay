@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
     public int sensitivity = 200;
-    public Camera camera;
+    public Camera cam;
 
     float mouseX;
     float mouseY; 
@@ -24,6 +24,6 @@ public class PlayerCamera : MonoBehaviour
         mouseY -= Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
 
         transform.rotation = Quaternion.Euler(0f ,mouseX, 0f);
-        camera.transform.localRotation = Quaternion.Euler(mouseY, 0f, 0f);
+        cam.transform.localRotation = Quaternion.Euler(mouseY, 0f, 0f);
     }
 }

@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    private void Update()    
+    private void Update()     
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, .5f, mask);
         horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
