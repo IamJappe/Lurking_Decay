@@ -18,12 +18,27 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     Vector3 velocity;
 
+    [Header("Crouch")]
+    public float crouchHeight;
+    public float originalHeight;
+    bool isCrouching = false;
+    public GameObject crouchPostProcessing;
+    public float smoothTime = 0.2f; // Adjust the smooth time as needed
+    public float crouchSpeed = 6f; // Adjust the crouch speed as needed
+    public float standingSpeed = 10f;   
+
     private void Start()  
     {
         controller = GetComponent<CharacterController>();
     }
 
     private void Update()     
+    {
+        Movement();
+        Crouch();
+    }
+
+    void Movement()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, .5f, mask);
         horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
@@ -43,4 +58,39 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    void Crouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            StartCoroutine(CrouchTransition());
+        }
+    }
+
+    IEnumerator CrouchTransition()
+    {
+        isCrouching = !isCrouching;
+
+        float targetHeight = isCrouching ? crouchHeight : originalHeight;
+
+        float elapsedTime = 0f;
+        float startHeight = controller.height;
+
+        while (elapsedTime < smoothTime)
+        {
+            controller.height = Mathf.Lerp(startHeight, targetHeight, elapsedTime / smoothTime);
+            elapsedTime += Time.deltaTime;
+
+            speed = (int)Mathf.Lerp(speed, isCrouching ? crouchSpeed : standingSpeed, elapsedTime / smoothTime);
+
+            yield return null;
+        }
+
+        controller.height = targetHeight;
+
+        speed = isCrouching ? (int)crouchSpeed : (int)standingSpeed;
+
+        crouchPostProcessing.SetActive(isCrouching);
+    }
+
 }

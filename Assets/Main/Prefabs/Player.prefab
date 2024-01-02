@@ -632,6 +632,12 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
+  crouchHeight: 0
+  originalHeight: 2.5
+  crouchPostProcessing: {fileID: 0}
+  smoothTime: 0.2
+  crouchSpeed: 6
+  standingSpeed: 10
 --- !u!114 &3412486373730813846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +671,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 2.5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3

@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     public float changeDirectionInterval = 2f;
     public float radius = 1f;
     public float castDistance = 5f;
-    public GameObject rayPoint;
+    public Animator anim;
 
     bool shouldMove = true;
 
@@ -25,32 +25,39 @@ public class EnemyAI : MonoBehaviour
 
     void DetectPlayer()
     {
-        if (Physics.SphereCast(rayPoint.transform.position, radius, transform.forward, out RaycastHit hit, castDistance))
+       Vector3 castOrigin = transform.position + transform.forward * radius;
+
+        if (Physics.SphereCast(castOrigin, radius, transform.forward, out RaycastHit hit, castDistance))
         {
+            Debug.DrawLine(castOrigin, hit.point, Color.red);
+
             if (hit.collider.CompareTag("Player"))
             {
                 shouldMove = false;
-                Debug.Log("Player is in radius");
-            }
-            else
-            {
-                shouldMove = true;
+                anim.SetBool("Idle", true);
+                anim.SetBool("Run", false);
+                Debug.Log("Player hit");
             }
         }
         else
         {
-            // Draw a debug line to visualize the cast's maximum distance
-            Debug.DrawRay(transform.position, transform.forward * castDistance, Color.green);
+            shouldMove = true;
+            anim.SetBool("Idle", false);
+            anim.SetBool("Run", true);
+            Debug.DrawRay(castOrigin, transform.forward * castDistance, Color.green);
         }
     }
 
     private void ChangeDirection()
     {
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
+        if(shouldMove == true)
+        {
+            Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
 
-        Vector3 localRandomDirection = transform.TransformDirection(randomDirection);
+            Vector3 localRandomDirection = transform.TransformDirection(randomDirection);
 
-        transform.forward = localRandomDirection;
+            transform.forward = localRandomDirection;
+        }
     }
 
     void Move()
