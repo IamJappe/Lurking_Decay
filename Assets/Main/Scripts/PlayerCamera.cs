@@ -18,12 +18,18 @@ public class PlayerCamera : MonoBehaviour
         Cursor.visible = false;
     }
 
+    float xRot;
     private void Update()
     {
-        mouseX += Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
-        mouseY -= Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+        Mathf.Clamp(mouseY, -10, 10);
 
+        mouseX += Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
+        mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+
+        xRot -= mouseY;
+        xRot = Mathf.Clamp(xRot, -90,90);
+        Debug.Log(xRot);
         transform.rotation = Quaternion.Euler(0f ,mouseX, 0f);
-        cam.transform.localRotation = Quaternion.Euler(mouseY, 0f, 0f);
+        cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
     }
 }
