@@ -23,9 +23,13 @@ public class PlayerMovement : MonoBehaviour
     public float originalHeight;
     bool isCrouching = false;
     public GameObject crouchPostProcessing;
-    public float smoothTime = 0.2f; // Adjust the smooth time as needed
-    public float crouchSpeed = 6f; // Adjust the crouch speed as needed
+    public float smoothTime = 0.2f; 
+    public float crouchSpeed = 6f; 
     public float standingSpeed = 10f;   
+
+    [Header("Sprinting")]
+    public int runningSpeed;
+    int orginalSpeed = 10;
 
     private void Start()  
     {
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()     
     {
         Movement();
+        Sprinting();
         Crouch();
     }
 
@@ -57,6 +62,22 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void Sprinting()
+    {   
+        if (!isCrouching)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = runningSpeed;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                speed = orginalSpeed;
+            }
+        }
+       
     }
 
     void Crouch()
@@ -82,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             speed = (int)Mathf.Lerp(speed, isCrouching ? crouchSpeed : standingSpeed, elapsedTime / smoothTime);
-
             yield return null;
         }
 

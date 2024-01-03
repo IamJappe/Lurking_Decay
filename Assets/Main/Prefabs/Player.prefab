@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1038087138519403278}
   - component: {fileID: 7228211418541557105}
   - component: {fileID: 3256063056887903045}
+  - component: {fileID: 946242192079930740}
   m_Layer: 8
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,6 +157,27 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!95 &946242192079930740
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946530294719367873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: beb973d7c8078e3409e509d563667021, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2694088059688312204
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +538,7 @@ GameObject:
   - component: {fileID: 3887814989112067748}
   - component: {fileID: 3412486373730813846}
   - component: {fileID: 2764196037072074735}
+  - component: {fileID: 499424928144985797}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -638,6 +661,7 @@ MonoBehaviour:
   smoothTime: 0.2
   crouchSpeed: 6
   standingSpeed: 10
+  runningSpeed: 15
 --- !u!114 &3412486373730813846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +702,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &499424928144985797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768804856485061483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c76bc5dde3ca14fb76c0f74afa485e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 946242192079930740}
+  walking: 0
 --- !u!1 &6104729157976383129
 GameObject:
   m_ObjectHideFlags: 0
