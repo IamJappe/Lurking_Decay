@@ -534,7 +534,6 @@ GameObject:
   - component: {fileID: 2129513633428666891}
   - component: {fileID: 6323001180659383797}
   - component: {fileID: 5045554680484585046}
-  - component: {fileID: 8070936683225648518}
   - component: {fileID: 3887814989112067748}
   - component: {fileID: 3412486373730813846}
   - component: {fileID: 2764196037072074735}
@@ -613,29 +612,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8070936683225648518
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768804856485061483}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3887814989112067748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,13 +631,17 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
-  crouchHeight: 0
+  crouchHeight: 1.3
   originalHeight: 2.5
-  crouchPostProcessing: {fileID: 0}
-  smoothTime: 0.2
-  crouchSpeed: 6
+  crouchSmoothTime: 0.2
   standingSpeed: 10
+  crouchPostProcessing: {fileID: 0}
   runningSpeed: 15
+  sprintCooldown: 0.5
+  staminaSlider: {fileID: 0}
+  maxStamina: 75
+  staminaDecreaseRate: 10
+  staminaRechargeRate: 6.5
 --- !u!114 &3412486373730813846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +675,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.5
+  m_Height: 3
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
