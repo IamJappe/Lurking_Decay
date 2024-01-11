@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 3412486373730813846}
   - component: {fileID: 2764196037072074735}
   - component: {fileID: 499424928144985797}
+  - component: {fileID: 6445178033844688193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -639,9 +640,12 @@ MonoBehaviour:
   runningSpeed: 15
   sprintCooldown: 0.5
   staminaSlider: {fileID: 0}
-  maxStamina: 75
+  maxStamina: 85
   staminaDecreaseRate: 10
   staminaRechargeRate: 6.5
+  maxHealth: 50
+  currentHealth: 0
+  damageIndicator: {fileID: 6445178033844688193}
 --- !u!114 &3412486373730813846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +700,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 946242192079930740}
   walking: 0
+--- !u!114 &6445178033844688193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768804856485061483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334f9d58b428b7045b013e4bcf85fc43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
 --- !u!1 &6104729157976383129
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     public int runningSpeed;
     private int originalSpeed = 10;
     bool shouldSprint = true;
-    private bool shouldRun = true;
     public float sprintCooldown = 5f;
     private float sprintCooldownTimer;
 
@@ -39,14 +37,20 @@ public class PlayerMovement : MonoBehaviour
     public float maxStamina = 100f;
     public float staminaDecreaseRate = 10f;
     public float staminaRechargeRate = 5f;
-
     private float currentStamina;
+
+    [Header("Health")]
+    public int maxHealth;
+    public int currentHealth;
+    public DamageIndecator damageIndicator;
+    public GameObject deathScreen;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         originalHeight = controller.height;
         currentStamina = maxStamina;
+        currentHealth = maxHealth;
         UpdateStaminaBar();
     }
 
@@ -55,6 +59,13 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         Sprinting();
         HandleCrouch();
+
+        // Taking player Health TEST
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            TakeDamage(1);
+        }
     }
 
     void Movement()
@@ -81,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
    void Sprinting()
-{
+    {
     bool isRunning = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"));
 
     if (!isCrouching)
@@ -139,6 +150,18 @@ public class PlayerMovement : MonoBehaviour
                 crouchPostProcessing.SetActive(false);
             }
         }
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+
+        if(currentHealth <= 0)
+        {
+           deathScreen.SetActive(true);
+           Time.timeScale = 0;
+        }
+        damageIndicator.UpdateHealth(currentHealth, maxHealth);
     }
 
     IEnumerator CrouchTransition(float targetHeight)
