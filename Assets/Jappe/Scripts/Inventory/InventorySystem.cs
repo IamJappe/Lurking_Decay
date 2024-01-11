@@ -29,17 +29,10 @@ public class InventorySystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            Debug.Log("i is pressed");
-            inventoryScreenUI.SetActive(true);
-            isOpen = true;
-
-        }
-        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
-        {
-            inventoryScreenUI.SetActive(false);
-            isOpen = false;
+            inventoryScreenUI.SetActive(!isOpen);
+            isOpen = !isOpen;
         }
     }
 }
