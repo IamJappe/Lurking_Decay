@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -32,7 +33,15 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             inventoryScreenUI.SetActive(!isOpen);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             isOpen = !isOpen;
+        }
+
+        if(isOpen == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

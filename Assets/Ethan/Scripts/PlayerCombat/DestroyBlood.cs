@@ -10,8 +10,9 @@ public class DestroyBlood : MonoBehaviour
     void Start()
     {
         StartCoroutine(DestroyTheBlood());
+         
     }
-
+ 
     IEnumerator DestroyTheBlood()
     {
         yield return new WaitForSeconds(0.7f);

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+  
 public class PlayerCamera : MonoBehaviour
 {
     public int sensitivity = 200;
@@ -14,12 +14,12 @@ public class PlayerCamera : MonoBehaviour
     private void Start()
     {
         //Lock cursor
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     float xRot;
-    private void Update()
+    private void Update() 
     {
         Mathf.Clamp(mouseY, -10, 10);
 

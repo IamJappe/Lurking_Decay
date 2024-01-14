@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Stamina")]
     public Slider staminaSlider;
-    public float maxStamina = 100f;
+    public float maxStamina = 100f; 
     public float staminaDecreaseRate = 10f;
     public float staminaRechargeRate = 5f;
     private float currentStamina;
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             TakeDamage(1);
+            
         }
     }
 
