@@ -5,7 +5,7 @@ using UnityEngine;
 public class CutSceneManagerInto : MonoBehaviour
 {
     public float timeToAwake, timeToSpeak;
-    public GameObject staminaBar, healthBar, hands, player, playerOld;
+    public GameObject staminaBar, healthBar, hands, player, playerOld, miniMap;
     public GameObject text1;
     public GameObject contolltext1, contolltext2, contolltext3;
     public PlayerCamera cam;
@@ -13,13 +13,14 @@ public class CutSceneManagerInto : MonoBehaviour
     {
         StartCoroutine(WaitTime());
         StartCoroutine(TalkTime());
-    }
+    }  
 
     IEnumerator WaitTime()
     {
         yield return new WaitForSeconds(timeToAwake);
         player.SetActive(true);
         playerOld.SetActive(false);
+        miniMap.SetActive(true);
         staminaBar.SetActive(true);
         healthBar.SetActive(true);
     }
@@ -34,8 +35,11 @@ public class CutSceneManagerInto : MonoBehaviour
         cam.enabled = true;
         yield return new WaitForSeconds(2f);
         contolltext1.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(3f);
         contolltext1.SetActive(false);
         contolltext2.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        contolltext1.SetActive(false);
+        contolltext2.SetActive(false);
     }
 }
