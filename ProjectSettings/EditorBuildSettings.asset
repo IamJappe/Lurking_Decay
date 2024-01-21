@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Jappe/Lobby.unity
     guid: 6a030c3084fd5ba4da36e444394cde79
+  - enabled: 1
+    path: Assets/Jappe/Relay.unity
+    guid: 070668331a5dc754e8a0f267de39c358
   m_configObjects: {}
