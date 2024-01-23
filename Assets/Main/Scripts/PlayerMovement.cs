@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Settings")]
     public float gravity = -9.81f;
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Stamina")]
     public Slider staminaSlider;
-    public float maxStamina = 100f; 
+    public float maxStamina = 100f;
     public float staminaDecreaseRate = 10f;
     public float staminaRechargeRate = 5f;
     private float currentStamina;
@@ -45,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
     public DamageIndecator damageIndicator;
     public GameObject deathScreen;
 
+    private void Awake()
+    {
+        if (!IsOwner) return;
+    }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -62,10 +68,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Taking player Health TEST
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             TakeDamage(1);
-            
+
         }
     }
 
@@ -92,45 +98,45 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-   void Sprinting()
+    void Sprinting()
     {
-    bool isRunning = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"));
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"));
 
-    if (!isCrouching)
-    {
-        if (isRunning && shouldSprint)
+        if (!isCrouching)
         {
-            if (currentStamina > 0)
+            if (isRunning && shouldSprint)
             {
-                speed = runningSpeed;
-                DecreaseStamina(staminaDecreaseRate * Time.deltaTime);
+                if (currentStamina > 0)
+                {
+                    speed = runningSpeed;
+                    DecreaseStamina(staminaDecreaseRate * Time.deltaTime);
+                }
+                else
+                {
+                    shouldSprint = false;
+                    speed = originalSpeed;
+                    sprintCooldownTimer = sprintCooldown; // Start cooldown
+                }
             }
             else
             {
-                shouldSprint = false;
+                if (currentStamina < maxStamina)
+                {
+                    RechargeStamina(staminaRechargeRate * Time.deltaTime);
+                }
+                else if (sprintCooldownTimer > 0)
+                {
+                    sprintCooldownTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    shouldSprint = true;
+                }
+
                 speed = originalSpeed;
-                sprintCooldownTimer = sprintCooldown; // Start cooldown
             }
-        }
-        else
-        {
-            if (currentStamina < maxStamina)
-            {
-                RechargeStamina(staminaRechargeRate * Time.deltaTime);
-            }
-            else if (sprintCooldownTimer > 0)
-            {
-                sprintCooldownTimer -= Time.deltaTime;
-            }
-            else
-            {
-                shouldSprint = true;
-            }
-
-            speed = originalSpeed;
         }
     }
-}
 
     void HandleCrouch()
     {
@@ -157,10 +163,10 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth -= dmg;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-           deathScreen.SetActive(true);
-           Time.timeScale = 0;
+            deathScreen.SetActive(true);
+            Time.timeScale = 0;
         }
         damageIndicator.UpdateHealth(currentHealth, maxHealth);
     }
@@ -207,7 +213,10 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateStaminaBar()
     {
         float fillAmount = currentStamina / maxStamina;
-        staminaSlider.value = fillAmount;
+        if (staminaSlider)
+        {
+            staminaSlider.value = fillAmount;
+        }
     }
 }
 

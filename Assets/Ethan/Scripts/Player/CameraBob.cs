@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class CameraBob : MonoBehaviour
+public class CameraBob : NetworkBehaviour
 {
     public Animator anim;
     public bool walking;
+
+    private void Awake()
+    {
+        if (!IsOwner) return;
+    }
     void Update()
     {
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))

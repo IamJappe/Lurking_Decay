@@ -1,15 +1,21 @@
 using System.Collections;
+using System.Globalization;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerPunching : MonoBehaviour
+public class PlayerPunching : NetworkBehaviour
 {
     public Animator handAnim;
     public Transform punchPoint;
     public float punchRange = 2f;
     public GameObject bloodEffect;
     private bool isPunching = false;
-   // public HealthSystem system;  // Assuming you have a HealthSystem component attached
+    // public HealthSystem system;  // Assuming you have a HealthSystem component attached
 
+    private void Start()
+    {
+        if (!IsOwner) return;
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !isPunching)

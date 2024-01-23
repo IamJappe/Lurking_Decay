@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-  
-public class PlayerCamera : MonoBehaviour
+
+public class PlayerCamera : NetworkBehaviour
 {
     public int sensitivity = 200;
     public Camera cam;
 
     float mouseX;
-    float mouseY; 
-    
-  
+    float mouseY;
+
+    public override void OnNetworkSpawn()
+    {
+        cam.gameObject.SetActive(IsOwner);
+        if (!IsOwner) return;
+    }
     private void Start()
     {
         //Lock cursor

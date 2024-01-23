@@ -535,12 +535,12 @@ GameObject:
   - component: {fileID: 6323001180659383797}
   - component: {fileID: 2764196037072074735}
   - component: {fileID: 5045554680484585046}
+  - component: {fileID: 8214562008483046602}
   - component: {fileID: 3887814989112067748}
   - component: {fileID: 3412486373730813846}
   - component: {fileID: 499424928144985797}
-  - component: {fileID: 6445178033844688193}
-  - component: {fileID: 8214562008483046602}
   - component: {fileID: 5840058615822805559}
+  - component: {fileID: -948351496415492431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -557,8 +557,8 @@ Transform:
   m_GameObject: {fileID: 5768804856485061483}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.598914, y: 41.042736, z: 66.212814}
-  m_LocalScale: {x: 1.492414, y: 1.5831527, z: 1.492414}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6562057724498057976}
@@ -641,6 +641,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8214562008483046602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768804856485061483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1009102920
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3887814989112067748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,7 +693,7 @@ MonoBehaviour:
   staminaRechargeRate: 6.5
   maxHealth: 50
   currentHealth: 0
-  damageIndicator: {fileID: 6445178033844688193}
+  damageIndicator: {fileID: 0}
   deathScreen: {fileID: 0}
 --- !u!114 &3412486373730813846
 MonoBehaviour:
@@ -703,39 +723,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 946242192079930740}
   walking: 0
---- !u!114 &6445178033844688193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768804856485061483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334f9d58b428b7045b013e4bcf85fc43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
---- !u!114 &8214562008483046602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768804856485061483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5840058615822805559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,6 +753,19 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-948351496415492431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768804856485061483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334f9d58b428b7045b013e4bcf85fc43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
 --- !u!1 &6104729157976383129
 GameObject:
   m_ObjectHideFlags: 0
