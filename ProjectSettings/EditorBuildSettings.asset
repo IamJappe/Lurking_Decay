@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Jappe/Lobby.unity
     guid: 6a030c3084fd5ba4da36e444394cde79
   - enabled: 1
-    path: Assets/Jappe/Relay.unity
+    path: Assets/Jappe/Relay/Relay.unity
     guid: 070668331a5dc754e8a0f267de39c358
   m_configObjects: {}
