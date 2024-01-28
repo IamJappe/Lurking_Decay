@@ -57,7 +57,7 @@ public class InteractableTalking : MonoBehaviour
         player.SetActive(false);
         swarmCamera.SetActive(true);
         canavs.SetActive(false);
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(10f);
         player.SetActive(true);
         swarmCamera.SetActive(false);
         canavs.SetActive(true);

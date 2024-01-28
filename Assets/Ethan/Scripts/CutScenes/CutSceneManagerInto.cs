@@ -7,7 +7,7 @@ public class CutSceneManagerInto : MonoBehaviour
     public float timeToAwake, timeToSpeak;
     public GameObject staminaBar, healthBar, hands, player, playerOld, miniMap;
     public GameObject text1;
-    public GameObject contolltext1, contolltext2, contolltext3;
+    public GameObject contolltext1, contolltext2, contolltext3, eyelids;
     public PlayerCamera cam;
     void Start()
     {
@@ -23,6 +23,7 @@ public class CutSceneManagerInto : MonoBehaviour
         miniMap.SetActive(true);
         staminaBar.SetActive(true);
         healthBar.SetActive(true);
+        eyelids.SetActive(false);
     }
 
     IEnumerator TalkTime()
