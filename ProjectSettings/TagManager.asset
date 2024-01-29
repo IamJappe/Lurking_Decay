@@ -7,6 +7,7 @@ TagManager:
   - HandsAttack
   - Dummy
   - Hands
+  - Crosshair
   layers:
   - Default
   - TransparentFX
