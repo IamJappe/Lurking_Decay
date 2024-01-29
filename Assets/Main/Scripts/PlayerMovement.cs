@@ -3,6 +3,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -25,7 +26,7 @@ public class PlayerMovement : NetworkBehaviour
     private bool isCrouching = false;
     private CharacterController controller;
     private Vector3 velocity;
-    public GameObject crouchPostProcessing;
+    public PostProcessVolume crouchPostProcessing;
 
     [Header("Sprinting")]
     public int runningSpeed;
@@ -148,13 +149,13 @@ public class PlayerMovement : NetworkBehaviour
             {
                 StartCoroutine(CrouchTransition(crouchHeight));
                 speed = 6;
-                crouchPostProcessing.SetActive(true);
+                crouchPostProcessing.enabled = true;
             }
             else
             {
                 StartCoroutine(CrouchTransition(originalHeight));
                 speed = 10;
-                crouchPostProcessing.SetActive(false);
+                crouchPostProcessing.enabled = false;
             }
         }
     }
