@@ -574,7 +574,6 @@ GameObject:
   - component: {fileID: 499424928144985797}
   - component: {fileID: 5840058615822805559}
   - component: {fileID: -948351496415492431}
-  - component: {fileID: 2060256296640396415}
   - component: {fileID: 1040273944355756221}
   m_Layer: 0
   m_Name: Player
@@ -689,7 +688,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 4.5
-  crossHair: {fileID: 0}
   changeCrossHair: 1
 --- !u!114 &8214562008483046602
 MonoBehaviour:
@@ -816,22 +814,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
---- !u!114 &2060256296640396415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768804856485061483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01ab3c08cf87a0b4b9acb88cc7e447a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holdButton: 101
-  holdTime: 1
-  hands: {fileID: 3100644118648179817}
-  anim: {fileID: 946242192079930740}
 --- !u!114 &1040273944355756221
 MonoBehaviour:
   m_ObjectHideFlags: 0

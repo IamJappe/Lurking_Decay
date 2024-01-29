@@ -43,7 +43,7 @@ public class StashWeapons : MonoBehaviour
     IEnumerator Stash()
     {
         print("start");
-        yield return new WaitForSeconds(3.8f);
+        yield return new WaitForSeconds(3.5f);
         hands.SetActive(false);
         print("end");
     }

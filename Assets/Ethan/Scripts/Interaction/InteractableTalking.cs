@@ -13,7 +13,7 @@ public class InteractableTalking : MonoBehaviour
     public GameObject swarmCamera;
     public GameObject player, textAttack, hands;
     public GameObject canavs;
-    public StashWeapons stashWeapons;
+    //public StashWeapons stashWeapons;
     bool introFinished = false;
 
     public void Interact()
@@ -59,7 +59,7 @@ public class InteractableTalking : MonoBehaviour
         swarmCamera.SetActive(true);
         canavs.SetActive(false);
         yield return new WaitForSeconds(10f);
-        stashWeapons.enabled = true;
+        //stashWeapons.enabled = true;
         player.SetActive(true);
         swarmCamera.SetActive(false);
         canavs.SetActive(true);
