@@ -5,26 +5,19 @@ using UnityEngine.EventSystems;
 
 
 
-public class ItemSlot : MonoBehaviour, IDropHandler
-{
+public class ItemSlot : MonoBehaviour, IDropHandler {
 
-    public GameObject Item
-    {
-        get
-        {
-            if (transform.childCount > 0)
-            {
-                return transform.GetChild(0).gameObject;
-            }
-            return null;
+    public GameObject Item {
+        get {
+            return transform.childCount > 0
+                    ? transform.GetChild(0).gameObject
+                    : null;
         }
     }
 
-    public void OnDrop(PointerEventData eventData)
-    {
+    public void OnDrop(PointerEventData eventData) {
         Debug.Log("OnDrop");
-        if (!Item)
-        {
+        if (!Item) {
             DragDrop.itemBeingDragged.transform.SetParent(transform);
             DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
         }

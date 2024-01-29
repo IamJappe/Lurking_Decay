@@ -1,47 +1,34 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
+using System;
 
-public class InventorySystem : MonoBehaviour
-{
+public class InventorySystem : MonoBehaviour {
 
     public static InventorySystem Instance { get; set; }
-    public GameObject inventoryScreenUI;
-    public bool isOpen;
+    [SerializeField] private GameObject inventoryScreenUI;
+    [SerializeField] private bool isOpen = false; // TODO: remove serialize field if building for prod
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
+    private void Awake() {
+        if (Instance != null && Instance != this) {
             Destroy(gameObject);
-        }
-        else
-        {
+        } else {
             Instance = this;
         }
-    }
 
-    void Start()
-    {
-        isOpen = false;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
+        // TODO: Check if application stopped, if yes stop listener
+        // TODO: Cache player prefs instead of getting every time (probably expensive operation)
+        IDisposable disposable = InputSystem.onAnyButtonPress.Call((btn) => {
+            string btnName = PlayerPrefs.GetString("OPEN_INVENTORY") == ""
+                                ? "i"
+                                : PlayerPrefs.GetString("OPEN_INVENTORY");
+            if (btn.name != btnName) return;
+            Debug.Log("opening inventory");
             inventoryScreenUI.SetActive(!isOpen);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isOpen;
             isOpen = !isOpen;
-        }
 
-        if(isOpen == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        });
     }
 }
