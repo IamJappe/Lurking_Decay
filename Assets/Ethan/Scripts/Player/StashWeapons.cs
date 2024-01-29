@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StashWeapons : MonoBehaviour
 {
-    public KeyCode holdButton = KeyCode.Space;
-    public float holdTime = 2.0f;
+    public KeyCode holdButton = KeyCode.E;
+    public float holdTime = 1f;
     private bool isHolding = false;
     private float holdTimer = 0.0f;
+    public GameObject hands;
+    public Animator anim;
 
     private void Update()
     {
@@ -25,7 +28,9 @@ public class StashWeapons : MonoBehaviour
             {
                 if (holdTimer >= holdTime)
                 {
-                    Debug.Log("Button held down for" + holdTime + "seconds");
+                    anim.SetTrigger("Stash");
+                    StartCoroutine(Stash());
+                    isHolding = false;
                 }
             }
             else
@@ -33,5 +38,13 @@ public class StashWeapons : MonoBehaviour
                 isHolding = false;
             }
         }
+    }
+
+    IEnumerator Stash()
+    {
+        print("start");
+        yield return new WaitForSeconds(3.8f);
+        hands.SetActive(false);
+        print("end");
     }
 }
