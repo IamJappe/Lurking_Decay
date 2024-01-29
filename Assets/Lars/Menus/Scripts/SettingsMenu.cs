@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
-using UnityEngine.InputSystem.Controls;
 using TMPro;
 
 /// <summary>
@@ -22,9 +20,6 @@ public class SettingsMenu : MonoBehaviour {
     [SerializeField] private List<TextMeshProUGUI> KeybindLabels;
     [Space]
     [SerializeField] private GameObject PleaseEnterKeyScreen;
-
-
-
 
     private void Start() {
         views.ForEach(view => view.gameObject.SetActive(false));
@@ -45,23 +40,18 @@ public class SettingsMenu : MonoBehaviour {
     public void ChangeKeybind(string keybind) { // see inspector of keybinds view (buttons)
         PleaseEnterKeyScreen.SetActive(true);
         InputSystem.onAnyButtonPress.CallOnce((control) => {
-            PlayerPrefs.SetString(keybind.ToString(), control.name);
+            PlayerPrefCache.UpdateKeybind(keybind.ToString(), control.name);
             UpdateKeybinds();
             PleaseEnterKeyScreen.SetActive(false);
         });
     }
-
-    private void OnApplicationQuit() { // Only works if in prod
-        PlayerPrefs.Save();
-    }
-
 
     private void UpdateKeybinds() {
         if (CurrentTab != 0) return;
         int index = 0;
         KeybindLabels.ForEach(label => {
             Debug.Log(label);
-            label.SetText(PlayerPrefs.GetString(KeybindOrder[index]));
+            label.SetText(PlayerPrefCache.GetKeybind(KeybindOrder[index], ""));
             index++;
         });
     }
@@ -69,4 +59,9 @@ public class SettingsMenu : MonoBehaviour {
     public void OpenMenu() {
         transform.LeanMoveLocalX(Screen.width / 2, 0.5f);
     }
+
+    private void OnApplicationQuit() { // Only works if in prod
+        PlayerPrefs.Save();
+    }
+
 }
