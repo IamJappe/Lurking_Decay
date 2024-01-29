@@ -19,9 +19,7 @@ public class InventorySystem : MonoBehaviour {
         // TODO: Check if application stopped, if yes stop listener
         // TODO: Cache player prefs instead of getting every time (probably expensive operation)
         IDisposable disposable = InputSystem.onAnyButtonPress.Call((btn) => {
-            string btnName = PlayerPrefs.GetString("OPEN_INVENTORY") == ""
-                                ? "i"
-                                : PlayerPrefs.GetString("OPEN_INVENTORY");
+            string btnName = PlayerPrefCache.GetKeybind("OPEN_INVENTORY", "i");
             if (btn.name != btnName) return;
             Debug.Log("opening inventory");
             inventoryScreenUI.SetActive(!isOpen);
