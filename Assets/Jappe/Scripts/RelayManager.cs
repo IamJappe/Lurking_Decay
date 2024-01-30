@@ -14,20 +14,10 @@ using UnityEngine;
 
 public class RelayManager : MonoBehaviour
 {
-    private async void Start()
-    {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-        };
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-
     [Command]
     private async void CreateRelay()
     {
+        Debug.Log("Creating relay...");
         try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
