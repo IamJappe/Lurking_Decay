@@ -16,6 +16,12 @@ public static class PlayerPrefCache {
     private static Dictionary<string, int> Percentages = new();
     private static Dictionary<string, string> Strings = new();
 
+    public static class DefaultKeybinds {
+        public static string WALK_FORWARD = "w";
+
+
+        public static KeyCode SPRINT = KeyCode.LeftShift;
+    }
 
     #region Keybinds
     /// <summary>

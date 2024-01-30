@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using Unity.Netcode;
 using UnityEngine.Rendering.PostProcessing;
 
-public class PlayerMovement : NetworkBehaviour
-{
+public class PlayerMovement : NetworkBehaviour {
     [Header("Settings")]
     public float gravity = -9.81f;
     public int jumpPower = 5;
@@ -48,12 +47,10 @@ public class PlayerMovement : NetworkBehaviour
     public DamageIndecator damageIndicator;
     public GameObject deathScreen;
 
-    private void Awake()
-    {
+    private void Awake() {
         if (!IsOwner) return;
     }
-    private void Start()
-    {
+    private void Start() {
         controller = GetComponent<CharacterController>();
         originalHeight = controller.height;
         currentStamina = maxStamina;
@@ -61,23 +58,20 @@ public class PlayerMovement : NetworkBehaviour
         UpdateStaminaBar();
     }
 
-    private void Update()
-    {
+    private void Update() {
         Movement();
         Sprinting();
         HandleCrouch();
 
         // Taking player Health TEST
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+        if (Input.GetKeyDown(KeyCode.R)) {
             TakeDamage(1);
 
         }
     }
 
-    void Movement()
-    {
+    void Movement() {
         isGrounded = Physics.CheckSphere(groundCheck.position, .5f, mask);
         float horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
@@ -85,13 +79,11 @@ public class PlayerMovement : NetworkBehaviour
         Vector3 move = transform.forward * vertical + transform.right * horizontal;
         controller.Move(move);
 
-        if (isGrounded && velocity.y < 0)
-        {
+        if (isGrounded && velocity.y < 0) {
             velocity.y = -2f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
             velocity.y = jumpPower;
         }
 
@@ -99,38 +91,25 @@ public class PlayerMovement : NetworkBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    void Sprinting()
-    {
+    void Sprinting() {
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"));
 
-        if (!isCrouching)
-        {
-            if (isRunning && shouldSprint)
-            {
-                if (currentStamina > 0)
-                {
+        if (!isCrouching) {
+            if (isRunning && shouldSprint) {
+                if (currentStamina > 0) {
                     speed = runningSpeed;
                     DecreaseStamina(staminaDecreaseRate * Time.deltaTime);
-                }
-                else
-                {
+                } else {
                     shouldSprint = false;
                     speed = originalSpeed;
                     sprintCooldownTimer = sprintCooldown; // Start cooldown
                 }
-            }
-            else
-            {
-                if (currentStamina < maxStamina)
-                {
+            } else {
+                if (currentStamina < maxStamina) {
                     RechargeStamina(staminaRechargeRate * Time.deltaTime);
-                }
-                else if (sprintCooldownTimer > 0)
-                {
+                } else if (sprintCooldownTimer > 0) {
                     sprintCooldownTimer -= Time.deltaTime;
-                }
-                else
-                {
+                } else {
                     shouldSprint = true;
                 }
 
@@ -139,20 +118,15 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    void HandleCrouch()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
+    void HandleCrouch() {
+        if (Input.GetKeyDown(KeyCode.LeftControl)) {
             isCrouching = !isCrouching;
 
-            if (isCrouching)
-            {
+            if (isCrouching) {
                 StartCoroutine(CrouchTransition(crouchHeight));
                 speed = 6;
                 crouchPostProcessing.enabled = true;
-            }
-            else
-            {
+            } else {
                 StartCoroutine(CrouchTransition(originalHeight));
                 speed = 10;
                 crouchPostProcessing.enabled = false;
@@ -160,25 +134,21 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    public void TakeDamage(int dmg)
-    {
+    public void TakeDamage(int dmg) {
         currentHealth -= dmg;
 
-        if (currentHealth <= 0)
-        {
+        if (currentHealth <= 0) {
             deathScreen.SetActive(true);
             Time.timeScale = 0;
         }
         damageIndicator.UpdateHealth(currentHealth, maxHealth);
     }
 
-    IEnumerator CrouchTransition(float targetHeight)
-    {
+    IEnumerator CrouchTransition(float targetHeight) {
         float elapsedTime = 0f;
         float startHeight = controller.height;
 
-        while (elapsedTime < crouchSmoothTime)
-        {
+        while (elapsedTime < crouchSmoothTime) {
             controller.height = Mathf.Lerp(startHeight, targetHeight, elapsedTime / crouchSmoothTime);
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -187,35 +157,29 @@ public class PlayerMovement : NetworkBehaviour
         controller.height = targetHeight;
     }
 
-    private void DecreaseStamina(float amount)
-    {
+    private void DecreaseStamina(float amount) {
         currentStamina -= amount;
 
-        if (currentStamina < 0)
-        {
+        if (currentStamina < 0) {
             currentStamina = 0;
         }
 
         UpdateStaminaBar();
     }
 
-    private void RechargeStamina(float amount)
-    {
+    private void RechargeStamina(float amount) {
         currentStamina += amount;
 
-        if (currentStamina > maxStamina)
-        {
+        if (currentStamina > maxStamina) {
             currentStamina = maxStamina;
         }
 
         UpdateStaminaBar();
     }
 
-    private void UpdateStaminaBar()
-    {
+    private void UpdateStaminaBar() {
         float fillAmount = currentStamina / maxStamina;
-        if (staminaSlider)
-        {
+        if (staminaSlider) {
             staminaSlider.value = fillAmount;
         }
     }
