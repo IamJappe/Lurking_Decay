@@ -22,10 +22,10 @@ public class InventorySystem : MonoBehaviour {
             if (btn.name != btnName) return;
             Debug.Log("opening inventory");
             inventoryScreenUI.SetActive(!isOpen);
-            Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = isOpen;
+            Cursor.lockState = isOpen ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !isOpen;
             isOpen = !isOpen;
-
+            PlayerCamera.CanLook = !isOpen;
         });
     }
 }

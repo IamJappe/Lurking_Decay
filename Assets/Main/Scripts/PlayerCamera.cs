@@ -11,6 +11,8 @@ public class PlayerCamera : NetworkBehaviour
     float mouseX;
     float mouseY;
 
+    public static bool CanLook = true;
+
     public override void OnNetworkSpawn()
     {
         cam.gameObject.SetActive(IsOwner);
@@ -26,6 +28,7 @@ public class PlayerCamera : NetworkBehaviour
     float xRot;
     private void Update() 
     {
+        if(!CanLook) return;
         Mathf.Clamp(mouseY, -10, 10);
 
         mouseX += Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
