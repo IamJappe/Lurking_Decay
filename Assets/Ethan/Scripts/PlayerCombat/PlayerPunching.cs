@@ -14,7 +14,10 @@ public class PlayerPunching : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+        {
+            this.enabled = false;
+        }
     }
     private void Update()
     {
