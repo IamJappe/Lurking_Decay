@@ -4,6 +4,7 @@ using UnityEngine;
 using QFSW.QC;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Lobbies;
+using Unity.Netcode;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class LobbyManager : MonoBehaviour
         {
             CreateLobbyOptions options = new CreateLobbyOptions();
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-            Debug.Log("Sucesfully created lobby " + lobby.Name);
+            Debug.Log($"Sucesfully created lobby!");
+            Debug.Log($"Lobby name: {lobby.Name}");
+            Debug.Log($"Lobby code: {lobby.LobbyCode}.");
+            Debug.Log($"Lobby ID: {lobby.Id}.");
         }
         catch (LobbyServiceException e)
         {
@@ -42,9 +46,11 @@ public class LobbyManager : MonoBehaviour
     [Command]
     public async void JoinLobbyByCode(string code)
     {
+        Debug.Log("Joining lobby with code " + code + "...");
         try
         {
-            await LobbyService.Instance.JoinLobbyByCodeAsync(code);
+            var lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(code);
+            Debug.Log($"sucessfully joined lobby '{lobby.Name}' with ID: {lobby.Id}");
         }
         catch (LobbyServiceException e)
         {
@@ -55,9 +61,11 @@ public class LobbyManager : MonoBehaviour
     [Command]
     public async void JoinLobbyById(string id)
     {
+        Debug.Log($"Joining lobby with Id: {id}...");
         try
         {
-            await LobbyService.Instance.JoinLobbyByIdAsync(id);
+            var lobby = await LobbyService.Instance.JoinLobbyByIdAsync(id);
+            Debug.Log($"sucessfully joined lobby '{lobby.Name}' with ID: {lobby.Id}");
         }
         catch (LobbyServiceException e)
         {
