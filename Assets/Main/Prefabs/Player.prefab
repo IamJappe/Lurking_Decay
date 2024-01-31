@@ -33,7 +33,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2803429229770410347}
+  - {fileID: 3491907645565432057}
+  - {fileID: 5409813810842887231}
   m_Father: {fileID: 2129513633428666891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1038087138519403278
@@ -187,7 +188,7 @@ GameObject:
   - component: {fileID: 5989815409694809019}
   - component: {fileID: 742876346005663073}
   - component: {fileID: 1733268375628989982}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TriggerPlaceHolder
   m_TagString: HandsAttack
   m_Icon: {fileID: 0}
@@ -238,39 +239,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3100644118648179817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2803429229770410347}
-  m_Layer: 0
-  m_Name: Hands
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2803429229770410347
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3100644118648179817}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3491907645565432057}
-  - {fileID: 5409813810842887231}
-  m_Father: {fileID: 4246885201786711400}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3508497231291141807
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +251,7 @@ GameObject:
   - component: {fileID: 1874480811605111300}
   - component: {fileID: 2844487765552854170}
   - component: {fileID: 5785042387460494201}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hand_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +358,7 @@ GameObject:
   - component: {fileID: 535737473305205686}
   - component: {fileID: 5360058818195210738}
   - component: {fileID: 8438399931695031285}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hand_Right
   m_TagString: Hands
   m_Icon: {fileID: 0}
@@ -406,14 +374,14 @@ Transform:
   m_GameObject: {fileID: 5264290559601976768}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000000048894435, y: -0.00000011920929, z: 0.21512017, w: 0.97658765}
-  m_LocalPosition: {x: 0.3249988, y: -0.29099917, z: 0.8349992}
-  m_LocalScale: {x: 0.25689676, y: 0.25689995, z: 0.15725903}
+  m_LocalPosition: {x: 0.32499558, y: -0.29099965, z: 0.8349843}
+  m_LocalScale: {x: 0.25689682, y: 0.25689995, z: 0.15725902}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8291320857880517029}
   - {fileID: 5989815409694809019}
   - {fileID: 7102393001970439860}
-  m_Father: {fileID: 2803429229770410347}
+  m_Father: {fileID: 4246885201786711400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.845}
 --- !u!33 &2151489260783119563
 MeshFilter:
@@ -842,7 +810,7 @@ GameObject:
   - component: {fileID: 160431032715322340}
   - component: {fileID: 7896837021094986504}
   - component: {fileID: 4487936823123751917}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hand_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +916,7 @@ GameObject:
   - component: {fileID: 2554052589084614627}
   - component: {fileID: 8270934412526986616}
   - component: {fileID: 5688033008533118171}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hand_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,12 +932,12 @@ Transform:
   m_GameObject: {fileID: 8368877959709953102}
   serializedVersion: 2
   m_LocalRotation: {x: 2.3283064e-10, y: -0.000000029802322, z: -0.23267087, w: 0.9725556}
-  m_LocalPosition: {x: -0.33799344, y: -0.3060006, z: 0.8350111}
+  m_LocalPosition: {x: -0.33799696, y: -0.30600095, z: 0.83500487}
   m_LocalScale: {x: 0.25689673, y: 0.25689992, z: 0.15725908}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3408466801162140041}
-  m_Father: {fileID: 2803429229770410347}
+  m_Father: {fileID: 4246885201786711400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -26.909}
 --- !u!33 &7441488055676301487
 MeshFilter:
@@ -1072,7 +1040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7102393001970439860}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PunchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
