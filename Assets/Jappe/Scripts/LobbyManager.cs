@@ -13,16 +13,12 @@ public class LobbyManager : MonoBehaviour
     private float heartbeatTimer;
 
     // lobby heartbeat 
-    private void Update()
+    private async void Update()
     {
-        LobbyHeartbeat();
-    }
-    private async void LobbyHeartbeat()
-    {
-        if(hostLobby != null)
+        if (hostLobby != null)
         {
             heartbeatTimer -= Time.deltaTime;
-            if(heartbeatTimer <= 0 )
+            if (heartbeatTimer <= 0)
             {
                 heartbeatTimer = heartbeatTimerDelay;
                 await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
@@ -50,7 +46,6 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(e);
         }
     }
- 
     // joining lobbies in different ways
     [Command]
     private async void QuickJoinLobby()
