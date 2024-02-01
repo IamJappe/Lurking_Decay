@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097570815fa77c340bbf8027c5fb3ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heartbeatTimerDelay: 20
 --- !u!1 &563118804
 GameObject:
   m_ObjectHideFlags: 0
