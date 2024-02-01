@@ -4,18 +4,42 @@ using UnityEngine;
 using QFSW.QC;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Lobbies;
-using Unity.Netcode;
 
 public class LobbyManager : MonoBehaviour
 {
+
+    private Lobby hostLobby;
+    public float heartbeatTimerDelay = 20;
+    private float heartbeatTimer;
+
+    // lobby heartbeat 
+    private void Update()
+    {
+        LobbyHeartbeat();
+    }
+    private async void LobbyHeartbeat()
+    {
+        if(hostLobby != null)
+        {
+            heartbeatTimer -= Time.deltaTime;
+            if(heartbeatTimer <= 0 )
+            {
+                heartbeatTimer = heartbeatTimerDelay;
+                await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+            }
+        }
+    }
+
+    // creating lobby
     [Command]
-    public async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate)
+    private async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate)
     {
         Debug.Log("Creating lobby...");
         try
         {
             CreateLobbyOptions options = new CreateLobbyOptions();
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+
             Debug.Log($"Sucesfully created lobby!");
             Debug.Log($"Lobby name: {lobby.Name}");
             Debug.Log($"Lobby code: {lobby.LobbyCode}.");
@@ -26,9 +50,10 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(e);
         }
     }
-
+ 
+    // joining lobbies in different ways
     [Command]
-    public async void QuickJoinLobby()
+    private async void QuickJoinLobby()
     {
         Debug.Log("Quick joining lobby...");
         try
@@ -42,9 +67,8 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(e);
         }
     }
-
     [Command]
-    public async void JoinLobbyByCode(string code)
+    private async void JoinLobbyByCode(string code)
     {
         Debug.Log("Joining lobby with code " + code + "...");
         try
@@ -57,15 +81,35 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError(e);
         }
     }
-
     [Command]
-    public async void JoinLobbyById(string id)
+    private async void JoinLobbyById(string id)
     {
         Debug.Log($"Joining lobby with Id: {id}...");
         try
         {
             var lobby = await LobbyService.Instance.JoinLobbyByIdAsync(id);
             Debug.Log($"sucessfully joined lobby '{lobby.Name}' with ID: {lobby.Id}");
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError(e);
+        }
+    }
+
+    // listing lobbies with filters
+    [Command]
+    private async void ListLobbies()
+    {
+        try
+        {
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+
+            Debug.Log($"Found {queryResponse.Results.Count} lobbies.");
+            foreach (Lobby lobby in queryResponse.Results)
+            {
+                Debug.Log($"{lobby.Name} ({lobby.Players.Count}/{lobby.MaxPlayers})");
+            }
         }
         catch (LobbyServiceException e)
         {
