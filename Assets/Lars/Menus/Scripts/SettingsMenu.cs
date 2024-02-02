@@ -10,6 +10,9 @@ using TMPro;
 /// Computer\HKEY_CURRENT_USER\SOFTWARE\DefaultCompany\Lurking Decay
 /// </summary>
 public class SettingsMenu : MonoBehaviour {
+    [SerializeField] private Transform Container;
+    [SerializeField] private Transform MainMenu;
+    
     [Header("Global Tab Settings")]
     [SerializeField] private int CurrentTab = 0; // Keybinds by default, 0 = keybinds, 1 = audio, 2 = video (see buttons)
     [SerializeField] private List<ScrollRect> views; // Keybinds stored by index (see inspector)
@@ -28,7 +31,7 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     private void OnEnable() {
-        GetComponent<RectTransform>().localPosition = new Vector2(5000, 0);
+        Container.localPosition = new Vector2(Screen.width * 2, 0);
     }
 
     public void ChangeTab(int tabId) {
@@ -57,7 +60,9 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void OpenMenu() {
-        transform.LeanMoveLocalX(Screen.width / 2, 0.5f);
+        MainMenu.LeanMoveLocalX(-Screen.width * 2, 0.5f);
+        Container.LeanMoveLocalX(0, 0.5f);
+
     }
 
     private void OnApplicationQuit() { // Only works if in prod
