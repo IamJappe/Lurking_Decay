@@ -35,11 +35,11 @@ public class PlayerMovement : NetworkBehaviour {
     private float sprintCooldownTimer;
 
     [Header("Stamina")]
-    public Slider staminaSlider;
     public float maxStamina = 100f;
     public float staminaDecreaseRate = 10f;
     public float staminaRechargeRate = 5f;
     private float currentStamina;
+    private Slider stamina;
 
     [Header("Health")]
     public int maxHealth;
@@ -50,7 +50,20 @@ public class PlayerMovement : NetworkBehaviour {
     private void Awake() {
         if (!IsOwner) return;
     }
-    private void Start() {
+    private void Start() 
+    {
+
+        GameObject staminaObject = GameObject.Find("StaminaBar");
+
+        if (staminaObject != null)
+        {
+            stamina = staminaObject.GetComponent<Slider>();
+        }
+        else
+        {
+            Debug.LogError("StaminaBar GameObject not found!");
+        }
+
         controller = GetComponent<CharacterController>();
         originalHeight = controller.height;
         currentStamina = maxStamina;
@@ -179,8 +192,8 @@ public class PlayerMovement : NetworkBehaviour {
 
     private void UpdateStaminaBar() {
         float fillAmount = currentStamina / maxStamina;
-        if (staminaSlider) {
-            staminaSlider.value = fillAmount;
+        if (stamina) {
+            stamina.value = fillAmount;
         }
     }
 }
