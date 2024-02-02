@@ -7,10 +7,14 @@ using Unity.Services.Core;
 
 public class Authenticator : MonoBehaviour
 {
+    private async void Start()
+    {
+        await UnityServices.InitializeAsync();
+    }
+
     [Command]
     public async void AuthenticateAnon()
     {
-        await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed in with Id: " + AuthenticationService.Instance.PlayerId);
