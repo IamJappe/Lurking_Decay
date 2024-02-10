@@ -214,6 +214,25 @@ public class PlayerMovement : NetworkBehaviour {
             stamina.value = fillAmount;
         }
     }
-
+    
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("CheckPoint"))
+        {
+            foreach (Quest quest in activeQuests) 
+            {
+                foreach (QuestGoal goal in quest.goals) 
+                {
+                    goal.MoveTo();
+                    if (goal.IsReached()) 
+                    {
+                        Debug.Log($"Quest goal '{goal.goalType}' complete!");
+                        quest.Complete();
+                    }
+                }
+            }
+        }
+    }
     
 }

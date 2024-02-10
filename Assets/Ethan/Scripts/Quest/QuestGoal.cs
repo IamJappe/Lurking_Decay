@@ -26,13 +26,29 @@ public class QuestGoal
         if (goalType == GoalType.TakeDamage)
             currentAmount++;
     }
+
+    public void Secure()
+    {
+        //Test type
+        if (goalType == GoalType.SecureBase)
+            currentAmount++;
+    }
+
+    public void MoveTo()
+    {
+        //Test type
+        if (goalType == GoalType.MoveTo)
+            currentAmount++;
+    }
 }
 
 public enum GoalType
 {
     Kill,
     Gathering,
-    TakeDamage
-    
+    TakeDamage,
+    SecureBase, 
+    MoveTo
+
     //We can add more types as needed
 }

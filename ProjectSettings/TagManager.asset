@@ -9,6 +9,7 @@ TagManager:
   - Hands
   - Crosshair
   - QuestGiver
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
