@@ -25,6 +25,7 @@ public class RayCastInteractable : MonoBehaviour
     void Update()
     {
         int interactableLayerMask = 1 << LayerMask.NameToLayer("Interactable");
+        int interactableLayerTalk = 1 << LayerMask.NameToLayer("InteractableTalk");
 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, interactionDistance, interactableLayerMask))
         {
@@ -43,5 +44,25 @@ public class RayCastInteractable : MonoBehaviour
             if (crossHair != null)
                 crossHair.color = Color.white;
         }
+
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitTalk, interactionDistance, interactableLayerTalk))
+        {
+            if (changeCrossHair && crossHair != null)
+                crossHair.color = Color.red;
+
+            InteractableNpcTalk interactableTalk = hitTalk.collider.GetComponent<InteractableNpcTalk>();
+
+            if (interactableTalk != null && Input.GetMouseButtonDown(0))
+            {
+                interactableTalk.InteractTalk();
+            }
+        }
+        else
+        {
+            if (crossHair != null)
+                crossHair.color = Color.white;
+        }
     }
+
+    
 }

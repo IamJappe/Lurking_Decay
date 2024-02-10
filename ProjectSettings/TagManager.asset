@@ -8,6 +8,7 @@ TagManager:
   - Dummy
   - Hands
   - Crosshair
+  - QuestGiver
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Ground
   - PostProcessing
   - Interactable
-  - 
+  - InteractableTalk
   - 
   - 
   - 

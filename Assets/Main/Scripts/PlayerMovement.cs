@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 using UnityEngine.Rendering.PostProcessing;
+using System.Collections.Generic;
 
 public class PlayerMovement : NetworkBehaviour {
     [Header("Settings")]
@@ -45,6 +46,10 @@ public class PlayerMovement : NetworkBehaviour {
     public int currentHealth;
     public DamageIndecator damageIndicator;
     public GameObject deathScreen;
+
+    [Header("Questing")]
+    public Quest quest;
+    public List<Quest> activeQuests = new List<Quest>();
 
     private void Awake() {
         if (!IsOwner) return;
@@ -144,17 +149,33 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    public void TakeDamage(int dmg) {
-        currentHealth -= dmg;
+   public void TakeDamage(int dmg) {
+    currentHealth -= dmg;
 
-        if (currentHealth <= 0) {
-            deathScreen.SetActive(true);
-            Time.timeScale = 0;
-        }
-        damageIndicator.UpdateHealth(currentHealth, maxHealth);
+    if (currentHealth <= 0) 
+    {
+        deathScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 
-    IEnumerator CrouchTransition(float targetHeight) {
+    foreach (Quest quest in activeQuests) 
+    {
+        foreach (QuestGoal goal in quest.goals) 
+        {
+            goal.Damage();
+            if (goal.IsReached()) 
+            {
+                Debug.Log($"Quest goal '{goal.goalType}' complete!");
+                quest.Complete();
+            }
+        }
+    }
+
+    damageIndicator.UpdateHealth(currentHealth, maxHealth);
+}
+
+    IEnumerator CrouchTransition(float targetHeight) 
+    {
         float elapsedTime = 0f;
         float startHeight = controller.height;
 
@@ -193,4 +214,6 @@ public class PlayerMovement : NetworkBehaviour {
             stamina.value = fillAmount;
         }
     }
+
+    
 }
